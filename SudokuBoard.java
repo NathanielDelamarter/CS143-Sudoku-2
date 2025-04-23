@@ -27,7 +27,19 @@ public class SudokuBoard {
    }
    
    public Boolean isValid() {
-      return true;  
+      for(int r = 0; r < board.length; r++){
+         if(!rowValid(r))
+            return false;
+      }
+      for(int c = 0; c < board.length; c++){
+          if(!colValid(c))
+            return false;
+      }
+      for(int i = 1; i <= 9; i++){
+         if(!miniSquareValid(miniSquare(i)))
+            return false;
+      } 
+      return true;
    }
    
    private Boolean rowValid(int r) {
