@@ -1,6 +1,5 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class SudokuBoard { 
    private int [][] board;
@@ -27,6 +26,41 @@ public class SudokuBoard {
       }
    }
    
+   public Boolean isValid() {
+      return true;  
+   }
+   
+   private Boolean rowValid(int r) {
+      Set<Integer> row = new HashSet<>();
+      for(int c = 0; c < board[r].length; c++) {
+         if(row.contains(board[r][c]) && board[r][c] != 0) {
+            return false;
+         } else if(board[r][c] > 9 || board[r][c] < 0) {
+            return false;
+         } else {
+            row.add(board[r][c]);
+         }
+         
+      }
+      return true;
+   }
+   
+   private Boolean colValid(int c) {
+      Set<Integer> col = new HashSet<>();
+      for(int r = 0; r < board.length; r++) {
+         if(col.contains(board[r][c]) && board[r][c] != 0) {
+            return false;
+         } else if(board[r][c] > 9 || board[r][c] < 0) {
+            return false;
+         } else {
+            col.add(board[r][c]);
+         }
+         
+      }
+      return true;
+   }
+
+    
    public String toString () {
       String result = "";
       for (int r=0;r<9;r++) {
