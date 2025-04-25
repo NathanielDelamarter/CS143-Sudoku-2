@@ -27,19 +27,23 @@ public class SudokuBoard {
    }
    
    public Boolean isValid() {
-      for(int r = 0; r < board.length; r++){
+      for(int r = 0; r < board.length; r++) {
          if(!rowValid(r))
             return false;
       }
-      for(int c = 0; c < board.length; c++){
-          if(!colValid(c))
+      for(int c = 0; c < board.length; c++) {
+         if(!colValid(c))
             return false;
       }
-      for(int i = 1; i <= 9; i++){
+      for(int i = 1; i < 10; i++) {
          if(!miniSquareValid(miniSquare(i)))
             return false;
       } 
       return true;
+   }
+   
+   public Boolean isSolved() {
+      return false;
    }
    
    private Boolean rowValid(int r) {
@@ -87,14 +91,14 @@ public class SudokuBoard {
    
    private Boolean miniSquareValid(int[][] mini){
       Set<Integer> square = new HashSet<>();
-      for(int r = 0; r < board.length; r++) {
-         for(int c = 0; c < board[r].length; c++){
-            if(square.contains(board[r][c]) && board[r][c] != 0) {
-            return false;
-         } else if(board[r][c] > 9 || board[r][c] < 0) {
-            return false;
-         } else {
-            square.add(board[r][c]);
+      for(int r = 0; r < mini.length; r++) {
+         for(int c = 0; c < mini[r].length; c++){
+            if(square.contains(mini[r][c]) && mini[r][c] != 0) {
+               return false;
+            } else if(mini[r][c] > 9 || mini[r][c] < 0) {
+               return false;
+            } else {
+               square.add(mini[r][c]);
          }
 
          }
