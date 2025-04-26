@@ -43,7 +43,27 @@ public class SudokuBoard {
    }
    
    public Boolean isSolved() {
-      return false;
+      // Initialized a new HashMap and loaded the keys 1 - 9 with values of 0
+      Map<Integer,Integer> map = new HashMap<>();
+      for(int k = 1; k < 10; k++) {
+         map.put(k,0);
+      }
+      // Iterated through board array and counted up occurances of 1 - 9, disregarding anything else
+      for(int r = 0; r < board.length; r++) {
+         for(int c = 0; c < board[r].length; c++) {
+            if(board[r][c] < 10 && board[r][c] > 0) {
+               int count = map.get(board[r][c]);
+               map.put(board[r][c],count + 1);
+            }
+         }
+      }
+      // Iterated through HashMap and returned false if any of the values were not equal to 9
+      for (Map.Entry<Integer,Integer> entry : map.entrySet()) {
+         if (entry.getValue() != 9)
+            return false;
+      }
+      return true;
+      
    }
    
    private Boolean rowValid(int r) {
